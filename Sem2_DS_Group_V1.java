@@ -55,7 +55,7 @@ public class Sem2_DS_Group_V1
         }
 
         String[] nodes = preorder.split(" ");
-        // Fuuccckkk!!!!!!!
+        
         int[] index = { 0 };
         return constructBSTHelper(nodes, index, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
@@ -64,19 +64,18 @@ public class Sem2_DS_Group_V1
     {
         if (index[0] >= nodes.length) 
         {
-            // System.out.println("Index********"+index[0]);
             return null;
         }
 
         int val = Integer.parseInt(nodes[index[0]]);
-        // System.out.println(val);
+        
         if (val < min || val > max) 
         {
             return null;
         }
 
         BST node = new BST(val);
-        index[0]++;// what the fuck!!!!
+        index[0]++;
         node.left = constructBSTHelper(nodes, index, min, val - 1);
         node.right = constructBSTHelper(nodes, index, val + 1, max);
 
@@ -121,9 +120,7 @@ public class Sem2_DS_Group_V1
             return;
         }
         spaces += count;
-        // System.out.println("******" + root.val);
-        // son of a bittchhh!!!!!!
-
+        
         printTree(root.right, spaces, count);
 
         for (int i = count; i < spaces; i++) 
