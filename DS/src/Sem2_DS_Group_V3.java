@@ -1,8 +1,6 @@
 //40 30 25 15 28 35 50 45 60 55 70
 //40 15 4 10 30 25 34 60 70 65 95
 //100 20 10 30 200 150 300
-//22 12 8 20 30 25 40
-//25 15 10 4 12 22 18 24 50 35 31 44 70 66 90
 //40 30 50
 //Examples of Pre-order above.
 
@@ -20,50 +18,63 @@ class BST {
     }
 }
 
-public class Sem2_DS_Group_V2 {
+public class Sem2_DS_Group_V3 {
 
     static int index = 0;
+    static String[] nodes;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter pre-order traversal as a string: ");
-        String preorder = sc.nextLine();
-        sc.close();
+        String preorder;
+        BST root;
+        while (true) {
 
-        BST root = makeBST(preorder);
+            while (true) {
+                System.out.print("Enter pre-order traversal as a string: ");
+                preorder = sc.nextLine().trim();
+
+                if (preorder == null || preorder.isEmpty() || (preorder.equals(" "))) {
+                    System.out.println("Input is Empty. Try Again.");
+                } else {
+                    break;
+                }
+            }
+
+            nodes = preorder.split("\\s+");
+
+            root = makeBST(Integer.MIN_VALUE, Integer.MAX_VALUE);
+
+            if (index < nodes.length) {
+                System.out.println("BST PreOrder is not valid. Try again");
+            } else {
+                break;
+            }
+        }
+
+        sc.close();
 
         printTree(root, 0, 4);
 
+        System.out.println("\n");
+
         showRoot(root);
 
-        System.out.print("In-order traversal: ");
+        System.out.print("In-order traversal:\t");
         inOrderTraversal(root);
         System.out.println();
 
-        System.out.print("Pre-order traversal: ");
+        System.out.print("Pre-order traversal:\t");
         preOrderTraversal(root);
         System.out.println();
 
-        System.out.print("Post-order traversal: ");
+        System.out.print("Post-order traversal:\t");
         postOrderTraversal(root);
         System.out.println();
 
         System.out.println();
     }
 
-    public static BST makeBST(String preorder) {
-        if (preorder == null || preorder.isEmpty()) {
-            System.out.println("Write Something!!!");
-            System.exit(0);
-            return null;
-        }
-
-        String[] nodes = preorder.split(" ");
-
-        return arrangeBST(nodes, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    }
-
-    private static BST arrangeBST(String[] nodes, int min, int max) {
+    private static BST makeBST(int min, int max) {
 
         if (index >= nodes.length) {
             return null;
@@ -72,12 +83,11 @@ public class Sem2_DS_Group_V2 {
         try {
             val = Integer.parseInt(nodes[index]);
         } catch (Exception e) {
-            System.out.println("Not Valid input.");
-            System.exit(0);
+            System.out.println("Not Valid input. Try Again.");
+            main(nodes);
         }
 
         if (val < min || val > max) {
-
             return null;
         }
 
@@ -85,9 +95,9 @@ public class Sem2_DS_Group_V2 {
 
         index++;
 
-        node.left = arrangeBST(nodes, min, val - 1);
+        node.left = makeBST(min, val - 1);
 
-        node.right = arrangeBST(nodes, val + 1, max);
+        node.right = makeBST(val + 1, max);
 
         return node;
     }
@@ -95,14 +105,14 @@ public class Sem2_DS_Group_V2 {
     public static void inOrderTraversal(BST root) {
         if (root != null) {
             inOrderTraversal(root.left);
-            System.out.print(root.val + " , ");
+            System.out.print(root.val + " ");
             inOrderTraversal(root.right);
         }
     }
 
     public static void preOrderTraversal(BST root) {
         if (root != null) {
-            System.out.print(root.val + " , ");
+            System.out.print(root.val + " ");
             preOrderTraversal(root.left);
             preOrderTraversal(root.right);
         }
@@ -112,7 +122,7 @@ public class Sem2_DS_Group_V2 {
         if (root != null) {
             postOrderTraversal(root.left);
             postOrderTraversal(root.right);
-            System.out.print(root.val + " , ");
+            System.out.print(root.val + " ");
         }
     }
 

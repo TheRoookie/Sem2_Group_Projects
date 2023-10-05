@@ -1,0 +1,248 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Oct 05, 2023 at 11:50 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `e-clothing`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bills`
+--
+
+CREATE TABLE `bills` (
+  `db_bill_id` int(11) NOT NULL,
+  `db_bill_date` date NOT NULL,
+  `db_bill_amount` double(10,2) NOT NULL,
+  `db_bill_no_of_orders` int(11) NOT NULL,
+  `db_bill_cust_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `db_cart_cust_id` int(11) NOT NULL,
+  `db_cart_product_id` int(11) NOT NULL,
+  `db_cart_quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `db_cust_id` int(11) NOT NULL,
+  `db_cust_user_name` varchar(20) NOT NULL,
+  `db_cust_name` varchar(30) NOT NULL,
+  `db_cust_pass` varchar(20) NOT NULL,
+  `db_cust_address` varchar(50) NOT NULL,
+  `db_cust_email` varchar(20) NOT NULL,
+  `db_cust_phone` bigint(10) NOT NULL,
+  `db_cust_gender` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`db_cust_id`, `db_cust_user_name`, `db_cust_name`, `db_cust_pass`, `db_cust_address`, `db_cust_email`, `db_cust_phone`, `db_cust_gender`) VALUES
+(1, 'user1', 'user', 'user', 'user', 'user', 1111111111, NULL),
+(3, 'test', 'test', 'test@test', '', 'test', 1234, 'male');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `db_order_id` int(11) NOT NULL,
+  `db_order_cust_id` int(11) NOT NULL,
+  `db_order_prod_id` int(11) NOT NULL,
+  `db_order_quality` int(11) NOT NULL,
+  `db_order_bill_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `db_prod_id` int(11) NOT NULL,
+  `db_prod_name` varchar(50) NOT NULL,
+  `db_prod_color` varchar(20) NOT NULL,
+  `db_prod_size` varchar(20) NOT NULL,
+  `db_prod_price` double DEFAULT NULL,
+  `db_prod_gender` varchar(20) NOT NULL,
+  `db_prod_vendor_id` int(11) NOT NULL,
+  `db_prod_stock` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`db_prod_id`, `db_prod_name`, `db_prod_color`, `db_prod_size`, `db_prod_price`, `db_prod_gender`, `db_prod_vendor_id`, `db_prod_stock`) VALUES
+(1, 'T-Shirt 1', 'red', 'Large', 400, 'male', 0, 0),
+(2, 'T-Shirt 1', 'red', 'Medium', 500, 'male', 0, 0),
+(3, 'T-Shirt 1', 'blue', 'Small', 300, 'male', 0, 0),
+(4, 'T-Shirt 2', 'red', 'Large', 500, 'male', 0, 0),
+(5, 'T-Shirt 2', 'green', 'Medium', 400, 'male', 0, 0),
+(6, 'T-shirt 2', 'blue', 'Small', 300, 'male', 0, 0),
+(7, 'T-shirt 3', 'yellow', 'Large', 700, 'male', 0, 0),
+(8, 'T-shirt 3', 'blue', 'Medium', 400, 'male', 0, 0),
+(9, 'T-shirt 3', 'blue', 'Small', 300, 'male', 0, 0),
+(10, 'Shirt 1', 'blue', 'Large', 600, 'male', 0, 0),
+(11, 'Shirt 1', 'red', 'Medium', 500, 'male', 0, 0),
+(12, 'Shirt 1', 'blue', 'Small', 300, 'male', 0, 0),
+(13, 'Shirt 2', 'red', 'Large', 500, 'male', 0, 0),
+(14, 'Shirt 2', 'green', 'Medium', 500, 'male', 0, 0),
+(15, 'Shirt 2', 'blue', 'Small', 300, 'male', 0, 0),
+(16, 'Shirt 3', 'blue', 'Large', 700, 'male', 0, 0),
+(17, 'Shirt 3', 'blue', 'Medium', 400, 'male', 0, 0),
+(18, 'Shirt 3', 'blue', 'Small', 300, 'male', 0, 0),
+(19, 'Kurti 1', 'red', 'Large', 800, 'female', 0, 0),
+(20, 'Kurti 1', 'red', 'Medium', 600, 'female', 0, 0),
+(21, 'Kurti 1', 'blue', 'Small', 500, 'female', 0, 0),
+(22, 'Kurti 2', 'red', 'Large', 900, 'female', 0, 0),
+(23, 'Kurti 2', 'green', 'Medium', 600, 'female', 0, 0),
+(24, 'Kurti 2', 'blue', 'Small', 400, 'female', 0, 0),
+(25, 'Kurti 3', 'yellow', 'Large', 700, 'female', 0, 0),
+(26, 'Kurti 3', 'blue', 'Medium', 500, 'female', 0, 0),
+(27, 'Kurti 3', 'blue', 'Small', 500, 'female', 0, 0),
+(28, 'Dress 1', 'blue', 'Large', 1000, 'female', 0, 0),
+(29, 'Dress 1', 'red', 'Medium', 800, 'female', 0, 0),
+(30, 'Dress 1', 'blue', 'Small', 600, 'female', 0, 0),
+(31, 'Dress 2', 'red', 'Large', 1200, 'female', 0, 0),
+(32, 'Dress 2', 'green', 'Medium', 700, 'female', 0, 0),
+(33, 'Dress 2', 'blue', 'Small', 600, 'female', 0, 0),
+(34, 'Dress 3', 'blue', 'Large', 1400, 'female', 0, 0),
+(35, 'Dress 3', 'blue', 'Medium', 700, 'female', 0, 0),
+(36, 'Dress 3', 'blue', 'Small', 600, 'female', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor`
+--
+
+CREATE TABLE `vendor` (
+  `db_ven_id` int(11) NOT NULL,
+  `db_ven_name` varchar(50) NOT NULL,
+  `db_ven_pass` varchar(50) NOT NULL,
+  `db_ven_city` varchar(20) NOT NULL,
+  `db_ven_phone` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `db_wish_cust_id` int(11) NOT NULL,
+  `db_wish_product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bills`
+--
+ALTER TABLE `bills`
+  ADD PRIMARY KEY (`db_bill_id`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`db_cust_id`) USING BTREE,
+  ADD UNIQUE KEY `unique_user` (`db_cust_user_name`),
+  ADD UNIQUE KEY `unique_phone` (`db_cust_phone`),
+  ADD UNIQUE KEY `unique_email` (`db_cust_email`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`db_order_id`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`db_prod_id`);
+
+--
+-- Indexes for table `vendor`
+--
+ALTER TABLE `vendor`
+  ADD PRIMARY KEY (`db_ven_id`),
+  ADD UNIQUE KEY `unique_vendor_phone` (`db_ven_phone`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bills`
+--
+ALTER TABLE `bills`
+  MODIFY `db_bill_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `db_cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `db_order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `db_prod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `vendor`
+--
+ALTER TABLE `vendor`
+  MODIFY `db_ven_id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
