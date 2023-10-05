@@ -53,7 +53,7 @@ class Clothing_proj {
 
 class Shop {
     Connection con;
-    int current_user;
+    int current_user = 0;
     Scanner sc = new Scanner(System.in);
 
     int save_price;
@@ -386,11 +386,12 @@ class Shop {
         System.out.println("│ -------------------------------------------------- │");
         System.out.println("│ 1. Shop For Men                                    │");
         System.out.println("│ 2. Shop For Women                                  │");
-        System.out.println("│ 3. View Your Wishlist                              │");
-        System.out.println("│ 4. View Your Cart                                  │");
-        System.out.println("│ 5. Check Your Order History                        │");
-        System.out.println("│ 6. Account Details                                 │");
-        System.out.println("│ 7. Exit                                            │");
+        System.out.println("│ 3. Search Using Catagories                         │");
+        System.out.println("│ 4. View Your Wishlist                              │");
+        System.out.println("│ 5. View Your Cart                                  │");
+        System.out.println("│ 6. Check Your Order History                        │");
+        System.out.println("│ 7. Account Details                                 │");
+        System.out.println("│ 8. Exit                                            │");
         System.out.println("├────────────────────────────────────────────────────┤");
         System.out.println("│ Please select an option (1-7):                     │");
         System.out.println("└────────────────────────────────────────────────────┘");
@@ -413,22 +414,26 @@ class Shop {
                 return true;
 
             case 3:
-                viewWishlist();
+                catagories();
                 return true;
 
             case 4:
-                viewCart();
+                viewWishlist();
                 return true;
 
             case 5:
-                orderHistory();
+                viewCart();
                 return true;
 
             case 6:
-                viewAccount();
+                orderHistory();
                 return true;
 
             case 7:
+                viewAccount();
+                return true;
+
+            case 8:
                 System.out.println("Exiting...Visit Again!");
                 return false;
 
@@ -466,11 +471,11 @@ class Shop {
         switch (mensSectionRes) {
             case 1:
                 // m_wm_filters("");
-                section("T-Shirts", "male");
+                section("t-shirt", "male");
                 return true;
 
             case 2:
-                section("Shirts", "male");
+                section("shirt", "male");
                 return true;
 
             case 3:
@@ -527,6 +532,10 @@ class Shop {
         }
     }
 
+    void catagories() throws Exception {
+        System.out.println("Comming Soon.");
+    }
+
     void viewWishlist() throws Exception { // done
 
         String sql = "SELECT `db_prod_id`, `db_prod_name`, `db_prod_size`, `db_prod_color`, `db_prod_price` FROM `product` WHERE `db_prod_id` IN (SELECT `db_wish_product_id` FROM `wishlist` WHERE `db_wish_cust_id` = ? );";
@@ -567,7 +576,7 @@ class Shop {
         // Add Buying Options here with the product ids in whshlistProductsId array
     }
 
-    void viewCart() throws Exception {
+    void viewCart() throws Exception { // done
         String sql = "SELECT `db_prod_id`, `db_prod_name`, `db_prod_size`, `db_prod_color` , `db_prod_price` FROM `product` WHERE `db_prod_id` IN (SELECT `db_cart_product_id` FROM `cart` where db_cart_cust_id = ?);";
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setInt(1, current_user);
@@ -625,69 +634,20 @@ class Shop {
     }
 
     // Lv-2
-    void section(String sectionHeader, String gender) {
+    void section(String sectionHeader, String gender) throws Exception {
         while (sectionPage(sectionHeader, gender)) {
         }
     }
 
-    boolean sectionPage(String sectionHeader, String gender) {
+    boolean sectionPage(String sectionHeader, String gender) throws Exception {
 
         // For Parth - List all sectionHeader items
+        String sql = "SELECT `db_prod_id`, `db_prod_name`, `db_prod_size`, `db_prod_color`, `db_prod_price` FROM `product` WHERE `db_prod_section`= '"
+                + sectionHeader + "' and `db_prod_gender` = '" + gender + "';";
+        PreparedStatement pst = con.prepareStatement(sql);
+        ResultSet sectionPageResultSet = pst.executeQuery();
 
-        System.out.println();
-        System.out.println("Comming Soon!");
-        System.out.println();
-
-        return false;
-    }
-
-    // pending
-    void filter(int i, int save_price, String save_colour, String save_size, String gen) throws Exception {
-        ArrayList<Integer> idList = new ArrayList<>();
-
-        System.out.println(save_price);
-        System.out.println(save_colour);
-        System.out.println(save_size);
-
-        String sql = "";
-        if (gen == male) {
-            switch (save_price) {
-                case 1:
-                    sql = "select * from product Where p_id_m = ? and color = ? and size = ? AND gender = ? and price BETWEEN 200 AND 500";
-                    break;
-                case 2:
-                    sql = "select * from product Where p_id_m = ? and color = ? and size = ? AND gender = ? and price BETWEEN 500 AND 1000";
-                    break;
-                case 3:
-                    sql = "select * from product Where p_id_m = ? and color = ? and size = ? AND gender = ? and price BETWEEN 1000 AND 1500";
-                    break;
-                default:
-                    System.out.println("Invalid price range selected.");
-                    break;
-            }
-        } else {
-            switch (save_price) {
-                case 1:
-                    sql = "select * from product Where p_id_wm = ? and color = ? and size = ? AND gender = ? and price BETWEEN 200 AND 500";
-                    break;
-                case 2:
-                    sql = "select * from product Where p_id_wm = ? and color = ? and size = ? AND gender = ? and price BETWEEN 500 AND 1000";
-                    break;
-                case 3:
-                    sql = "select * from product Where p_id_wm = ? and color = ? and size = ? AND gender = ? and price BETWEEN 1000 AND 1500";
-                    break;
-                default:
-                    System.out.println("Invalid price range selected.");
-                    break;
-            }
-
-        }
-        PreparedStatement p = con.prepareStatement(sql);
-        p.setInt(1, i);
-        p.setString(2, save_colour);
-        p.setString(3, save_size);
-        p.setString(4, gen);
-        ResultSet rs = p.executeQuery();
+        ArrayList<Integer> sectionIdList = new ArrayList<>();
 
         System.out.println(
                 "┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
@@ -695,30 +655,82 @@ class Shop {
                 "│                     ALL PRODUCT's                                                                                                             │");
         System.out.println(
                 "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
-        while (rs.next()) {
-            int id = rs.getInt("ID");
-            String name = rs.getString("p_name");
-            String color = rs.getString("color");
-            Double price = rs.getDouble("price");
+        while (sectionPageResultSet.next()) {
+            int id = sectionPageResultSet.getInt(1);
+            String name = sectionPageResultSet.getString(2);
+            String size = sectionPageResultSet.getString(3);
+            String color = sectionPageResultSet.getString(4);
+            Double price = sectionPageResultSet.getDouble(5);
 
-            idList.add(id);
+            sectionIdList.add(id);
 
             System.out.println(
                     "│                                                                                                                                         \t│");
-            System.out.println("│ ID » " + id + " │ Name » " + name + "\t│ Color » " + color + " │ Price » " + price
-                    + "                                                              \t\t\t│");
-        }
-        System.out.println(
-                "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
-        System.out.println(
-                "│ Please select an option (1-4):                                                                                                                │");
-        System.out.println(
-                "└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
+            System.out
+                    .println("│ ID » " + id + "│ Name » " + name + "\t\t│ Size » " + size + "\t\t│ Color » " + color
+                            + "\t\t│ Price » "
+                            + price
+                            + "\t\t\t\t\t\t\t\t\t│");
 
-        bill(idList);
-        con.close();
+        }
+        System.out.println();
+        System.out.println("Press 1 to buy now");
+        System.out.println("Press 2 to add to cart.");
+        System.out.println("Press 3 to add to Wishlist");
+        System.out.println("Press 4 to filter more.");
+        System.out.println("Press 5 to go back.");
+        int sectionPageRes = 0;
+        while (true) {
+            try {
+                sectionPageRes = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+                System.out.println("Invalid Input.");
+            }
+        }
+        int sectionPageSelectId = 0;
+        switch (sectionPageRes) {
+            case 1:
+                System.out.println("Enter Id of the selected item.");
+                try {
+                    sectionPageSelectId = sc.nextInt();
+                    // createBill(sectionPageSelectId);
+                    return false;
+                } catch (Exception e) {
+                    System.out.println("Invalid Input.");
+                    return true;
+                }
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+            case 5:
+
+                break;
+
+            default:
+                break;
+        }
+
+        return false;
     }
 
+    void createBill() {
+
+    }
+
+    void order(int productId, int billId) {
+        int quantity = 1;
+
+    }
+
+    // pending
     void bill(ArrayList<Integer> a) throws Exception {
 
         System.out.println("┌────────────────────────────────────────────────────┐");
@@ -1247,52 +1259,6 @@ class Shop {
         sc.close();
     }
 
-    void showall(int i, String gen) throws Exception {
-        ArrayList<Integer> idList = new ArrayList<>();
-
-        String sql = "";
-        if (gen == male) {
-            sql = "select * from product Where p_id_m = ? and gender = ?";
-        } else {
-            sql = "select * from product Where p_id_wm = ? and gender = ?";
-        }
-
-        PreparedStatement p = con.prepareStatement(sql);
-        p.setInt(1, i);
-        p.setString(2, gen);
-        ResultSet rs = p.executeQuery();
-
-        System.out.println(
-                "┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
-        System.out.println(
-                "│                     ALL PRODUCT's                                                                                                             │");
-        System.out.println(
-                "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
-        while (rs.next()) {
-            int id = rs.getInt("ID");
-            String name = rs.getString("p_name");
-            String color = rs.getString("color");
-            Double price = rs.getDouble("price");
-
-            idList.add(id);
-
-            System.out.println(
-                    "│                                                                                                                                         \t│");
-            System.out.println("│ ID » " + id + " │ Name » " + name + "\t│ Color » " + color + " │ Price » " + price
-                    + "                                                              \t\t\t│");
-
-        }
-        System.out.println(
-                "├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤");
-        System.out.println(
-                "│ Please select an option (1-4):                                                                                                                │");
-        System.out.println(
-                "└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
-
-        bill(idList);
-
-    }
-
     void m_wm_filters(String gen) throws Exception {
         int a1;
 
@@ -1310,7 +1276,7 @@ class Shop {
         a1 = sc.nextInt();
         switch (a1) {
             case 1:
-                showall(sn1, gen);
+                // showall(sn1, gen);
                 // bill();
                 break;
 
@@ -1346,7 +1312,7 @@ class Shop {
                             break;
                         case 4:
                             if (save_price != 0 && save_colour != "" && save_size != "") {
-                                filter(sn1, save_price, save_colour, save_size, gen);
+                                // filter(sn1, save_price, save_colour, save_size, gen);
 
                             } else {
                                 System.out.println("Please save all three Filter's");

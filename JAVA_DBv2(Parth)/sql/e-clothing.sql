@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2023 at 05:37 PM
+-- Generation Time: Oct 05, 2023 at 09:30 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -107,7 +107,7 @@ CREATE TABLE `product` (
   `db_prod_section` varchar(50) NOT NULL,
   `db_prod_name` varchar(50) NOT NULL,
   `db_prod_color` varchar(20) NOT NULL,
-  `db_prod_size` varchar(20) NOT NULL,
+  `db_prod_size` varchar(10) NOT NULL,
   `db_prod_price` double DEFAULT NULL,
   `db_prod_gender` varchar(20) NOT NULL,
   `db_prod_vendor_id` int(11) NOT NULL,
@@ -119,42 +119,42 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`db_prod_id`, `db_prod_section`, `db_prod_name`, `db_prod_color`, `db_prod_size`, `db_prod_price`, `db_prod_gender`, `db_prod_vendor_id`, `db_prod_stock`) VALUES
-(1, 't-shirt', 'T-Shirt 1', 'red', 'Large', 400, 'male', 0, 0),
-(2, 't-shirt', 'T-Shirt 1', 'red', 'Medium', 500, 'male', 0, 0),
-(3, 't-shirt', 'T-Shirt 1', 'blue', 'Small', 300, 'male', 0, 0),
-(4, 't-shirt', 'T-Shirt 2', 'red', 'Large', 500, 'male', 0, 0),
-(5, 't-shirt', 'T-Shirt 2', 'green', 'Medium', 400, 'male', 0, 0),
-(6, 't-shirt', 'T-shirt 2', 'blue', 'Small', 300, 'male', 0, 0),
-(7, 't-shirt', 'T-shirt 3', 'yellow', 'Large', 700, 'male', 0, 0),
-(8, 't-shirt', 'T-shirt 3', 'blue', 'Medium', 400, 'male', 0, 0),
-(9, 't-shirt', 'T-shirt 3', 'blue', 'Small', 300, 'male', 0, 0),
-(10, 'shirt', 'Shirt 1', 'blue', 'Large', 600, 'male', 0, 0),
-(11, 'shirt', 'Shirt 1', 'red', 'Medium', 500, 'male', 0, 0),
-(12, 'shirt', 'Shirt 1', 'blue', 'Small', 300, 'male', 0, 0),
-(13, 'shirt', 'Shirt 2', 'red', 'Large', 500, 'male', 0, 0),
-(14, 'shirt', 'Shirt 2', 'green', 'Medium', 500, 'male', 0, 0),
-(15, 'shirt', 'Shirt 2', 'blue', 'Small', 300, 'male', 0, 0),
-(16, 'shirt', 'Shirt 3', 'blue', 'Large', 700, 'male', 0, 0),
-(17, 'shirt', 'Shirt 3', 'blue', 'Medium', 400, 'male', 0, 0),
-(18, 'shirt', 'Shirt 3', 'blue', 'Small', 300, 'male', 0, 0),
-(19, 'kurti', 'Kurti 1', 'red', 'Large', 800, 'female', 0, 0),
-(20, 'kurti', 'Kurti 1', 'red', 'Medium', 600, 'female', 0, 0),
-(21, 'kurti', 'Kurti 1', 'blue', 'Small', 500, 'female', 0, 0),
-(22, 'kurti', 'Kurti 2', 'red', 'Large', 900, 'female', 0, 0),
-(23, 'kurti', 'Kurti 2', 'green', 'Medium', 600, 'female', 0, 0),
-(24, 'kurti', 'Kurti 2', 'blue', 'Small', 400, 'female', 0, 0),
-(25, 'kurti', 'Kurti 3', 'yellow', 'Large', 700, 'female', 0, 0),
-(26, 'kurti', 'Kurti 3', 'blue', 'Medium', 500, 'female', 0, 0),
-(27, 'kurti', 'Kurti 3', 'blue', 'Small', 500, 'female', 0, 0),
-(28, 'dress', 'Dress 1', 'blue', 'Large', 1000, 'female', 0, 0),
-(29, 'dress', 'Dress 1', 'red', 'Medium', 800, 'female', 0, 0),
-(30, 'dress', 'Dress 1', 'blue', 'Small', 600, 'female', 0, 0),
-(31, 'dress', 'Dress 2', 'red', 'Large', 1200, 'female', 0, 0),
-(32, 'dress', 'Dress 2', 'green', 'Medium', 700, 'female', 0, 0),
-(33, 'dress', 'Dress 2', 'blue', 'Small', 600, 'female', 0, 0),
-(34, 'dress', 'Dress 3', 'blue', 'Large', 1400, 'female', 0, 0),
-(35, 'dress', 'Dress 3', 'blue', 'Medium', 700, 'female', 0, 0),
-(36, 'dress', 'Dress 3', 'blue', 'Small', 600, 'female', 0, 0);
+(1, 't-shirt', 'T-Shirt 1', 'red', 'L', 400, 'male', 0, 0),
+(2, 't-shirt', 'T-Shirt 1', 'red', 'M', 500, 'male', 0, 0),
+(3, 't-shirt', 'T-Shirt 1', 'blue', 'S', 300, 'male', 0, 0),
+(4, 't-shirt', 'T-Shirt 2', 'red', 'L', 500, 'male', 0, 0),
+(5, 't-shirt', 'T-Shirt 2', 'green', 'M', 400, 'male', 0, 0),
+(6, 't-shirt', 'T-shirt 2', 'blue', 'S', 300, 'male', 0, 0),
+(7, 't-shirt', 'T-shirt 3', 'yellow', 'L', 700, 'male', 0, 0),
+(8, 't-shirt', 'T-shirt 3', 'blue', 'M', 400, 'male', 0, 0),
+(9, 't-shirt', 'T-shirt 3', 'blue', 'S', 300, 'male', 0, 0),
+(10, 'shirt', 'Shirt 1', 'blue', 'L', 600, 'male', 0, 0),
+(11, 'shirt', 'Shirt 1', 'red', 'M', 500, 'male', 0, 0),
+(12, 'shirt', 'Shirt 1', 'blue', 'S', 300, 'male', 0, 0),
+(13, 'shirt', 'Shirt 2', 'red', 'L', 500, 'male', 0, 0),
+(14, 'shirt', 'Shirt 2', 'green', 'M', 500, 'male', 0, 0),
+(15, 'shirt', 'Shirt 2', 'blue', 'S', 300, 'male', 0, 0),
+(16, 'shirt', 'Shirt 3', 'blue', 'L', 700, 'male', 0, 0),
+(17, 'shirt', 'Shirt 3', 'blue', 'M', 400, 'male', 0, 0),
+(18, 'shirt', 'Shirt 3', 'blue', 'S', 300, 'male', 0, 0),
+(19, 'kurti', 'Kurti 1', 'red', 'L', 800, 'female', 0, 0),
+(20, 'kurti', 'Kurti 1', 'red', 'M', 600, 'female', 0, 0),
+(21, 'kurti', 'Kurti 1', 'blue', 'S', 500, 'female', 0, 0),
+(22, 'kurti', 'Kurti 2', 'red', 'L', 900, 'female', 0, 0),
+(23, 'kurti', 'Kurti 2', 'green', 'M', 600, 'female', 0, 0),
+(24, 'kurti', 'Kurti 2', 'blue', 'S', 400, 'female', 0, 0),
+(25, 'kurti', 'Kurti 3', 'yellow', 'L', 700, 'female', 0, 0),
+(26, 'kurti', 'Kurti 3', 'blue', 'M', 500, 'female', 0, 0),
+(27, 'kurti', 'Kurti 3', 'blue', 'S', 500, 'female', 0, 0),
+(28, 'dress', 'Dress 1', 'blue', 'L', 1000, 'female', 0, 0),
+(29, 'dress', 'Dress 1', 'red', 'M', 800, 'female', 0, 0),
+(30, 'dress', 'Dress 1', 'blue', 'S', 600, 'female', 0, 0),
+(31, 'dress', 'Dress 2', 'red', 'L', 1200, 'female', 0, 0),
+(32, 'dress', 'Dress 2', 'green', 'M', 700, 'female', 0, 0),
+(33, 'dress', 'Dress 2', 'blue', 'S', 600, 'female', 0, 0),
+(34, 'dress', 'Dress 3', 'blue', 'L', 1400, 'female', 0, 0),
+(35, 'dress', 'Dress 3', 'blue', 'M', 700, 'female', 0, 0),
+(36, 'dress', 'Dress 3', 'blue', 'S', 600, 'female', 0, 0);
 
 -- --------------------------------------------------------
 
