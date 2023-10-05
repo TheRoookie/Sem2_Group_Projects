@@ -16,14 +16,13 @@ class Clothing_projcp {
 
         Scanner sc = new Scanner(System.in);
 
-        Connection con = connection("localhost:3306/e-clothing");
+        Connection con = connection("localhost:3306/parth");
 
         Shop s = new Shop(con);
 
-        // s.home();
+        s.home();
 
         sc.close();
-        con.close();
 
     }
 
@@ -39,11 +38,9 @@ class Clothing_projcp {
 
     static Connection connection(String url, String user, String pass) throws Exception {
         String dburl = "jdbc:mysql://" + url;
-        String dbuser = user;
-        String dbpassword = pass;
         String driver = "com.mysql.jdbc.Driver";
         Class.forName(driver);
-        Connection con = DriverManager.getConnection(dburl, dbuser, dbpassword);
+        Connection con = DriverManager.getConnection(dburl, user, pass);
         return con;
     }
 }
@@ -85,17 +82,12 @@ class user {
             switch (sl) {
                 case 1:
 
-                    String sql = "INSERT INTO customer (c_id, c_name, c_pw, c_address, c_email, c_pno) VALUES(?, ?, ?, ?, ?, ?)";
+                    String sql = "INSERT INTO customer (c_name, c_pw, c_address, c_email, c_pno) VALUES(?, ?, ?, ?, ?)";
                     PreparedStatement p = con.prepareStatement(sql);
 
-                    System.out.println("Enter the Your ID :");
-                    id = sc.nextInt();
-                    p.setInt(1, id);
-
-                    sc.nextLine();
                     System.out.println("Enter Your Name :");
                     String n = sc.next();
-                    p.setString(2, n);
+                    p.setString(1, n);
 
                     String pw;
                     outer: while (true) {
@@ -123,20 +115,20 @@ class user {
                         }
                     }
                     System.out.println("PASSWORD SET SUCCESSFULLY");
-                    p.setString(3, pw);
+                    p.setString(2, pw);
 
                     sc.nextLine();
                     System.out.println("Enter the Address :");
                     String add = sc.nextLine();
-                    p.setString(4, add);
+                    p.setString(3, add);
 
                     System.out.println("Enter the E-mail :");
                     String email = sc.nextLine();
-                    p.setString(5, email);
+                    p.setString(4, email);
 
                     System.out.println("Enter the phone number :");
                     long pno = sc.nextLong();
-                    p.setLong(6, pno);
+                    p.setLong(5, pno);
 
                     int rowsInserted = p.executeUpdate();
 
@@ -164,6 +156,7 @@ class user {
                         System.out.println("YOU have Loged-in Successfully");
                         flag = true;
                     }
+                    break;
 
                 default:
                     System.out.println("Try 1 or 2.");
@@ -211,7 +204,7 @@ class Shop {
                 int billid = sc.nextInt();
                 if (!a.contains(billid)) {
                     System.out.println("Product with ID " + billid + " is not found in the list.");
-                    con.close();
+
                     return;
                 }
                 String sql = "SELECT * FROM product WHERE ID = ?";
@@ -281,9 +274,9 @@ class Shop {
                 String dow_bill = sc.next();
                 if (dow_bill.equalsIgnoreCase("yes")) {
                     sc.nextLine();
-                    System.out.println("Enter the name of the folder : ");
-                    String n = sc.nextLine();
-                    File f = new File("D:\\CODE\\Java\\My Projects\\" + n);
+                    System.out.println("Check downloads folder : ");
+
+                    File f = new File("downloads");
 
                     if (!f.exists()) {
                         f.mkdir();
@@ -362,7 +355,7 @@ class Shop {
                 int productId_incart = sc.nextInt();
                 if (!a.contains(productId_incart)) {
                     System.out.println("Product with ID " + productId_incart + " is not found in the list.");
-                    con.close();
+
                     return;
                 }
 
@@ -409,19 +402,11 @@ class Shop {
             default:
                 break;
         }
-        con.close();
+
     }
 
     void bycolor(int i, String gen) throws Exception {
         ArrayList<Integer> idList = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-        String dburl = "jdbc:mysql://localhost:3306/parth";
-        String dbuser = "root";
-        String dbpassword = "";
-        String driver = "com.mysql.jdbc.Driver";
-
-        Class.forName(driver);
-        Connection con = DriverManager.getConnection(dburl, dbuser, dbpassword);
 
         Boolean flag = false;
         int bill = 0;
@@ -762,7 +747,7 @@ class Shop {
                 "└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
 
         bill(idList);
-        con.close();
+
     }
 
     void show_whis_cart(String whis_cart) throws Exception {
@@ -888,8 +873,6 @@ class Shop {
             home();
         }
 
-        con.close();
-
     }
 
     void show_byfilter(int i, int save_price, String save_colour, String save_size, String gen) throws Exception {
@@ -966,7 +949,7 @@ class Shop {
                 "└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
 
         bill(idList);
-        con.close();
+
     }
 
     int sn1 = 0;
@@ -1000,7 +983,7 @@ class Shop {
                     break;
             }
         } while (sn1 != 4);
-        con.close();
+
         sc.close();
     }
 
@@ -1111,7 +1094,7 @@ class Shop {
                     break;
             }
         } while (sn1 != 4);
-        con.close();
+
         sc.close();
     }
 
