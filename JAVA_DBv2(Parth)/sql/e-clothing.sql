@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2023 at 10:44 AM
+-- Generation Time: Oct 05, 2023 at 05:37 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,6 +47,16 @@ CREATE TABLE `cart` (
   `db_cart_quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`db_cart_cust_id`, `db_cart_product_id`, `db_cart_quantity`) VALUES
+(7, 1, 2),
+(7, 2, 2),
+(7, 3, 2),
+(7, 4, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -63,6 +73,14 @@ CREATE TABLE `customer` (
   `db_cust_phone` bigint(10) NOT NULL,
   `db_cust_gender` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`db_cust_id`, `db_cust_user_name`, `db_cust_name`, `db_cust_pass`, `db_cust_address`, `db_cust_email`, `db_cust_phone`, `db_cust_gender`) VALUES
+(1, 'user1', 'user', 'user', 'user', 'user', 1111111111, NULL),
+(7, 'test', 'test', 'test@test', '', 'test', 1234, 'male');
 
 -- --------------------------------------------------------
 
@@ -86,10 +104,11 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `product` (
   `db_prod_id` int(11) NOT NULL,
+  `db_prod_section` varchar(50) NOT NULL,
   `db_prod_name` varchar(50) NOT NULL,
   `db_prod_color` varchar(20) NOT NULL,
   `db_prod_size` varchar(20) NOT NULL,
-  `db_prod_price` int(11) NOT NULL,
+  `db_prod_price` double DEFAULT NULL,
   `db_prod_gender` varchar(20) NOT NULL,
   `db_prod_vendor_id` int(11) NOT NULL,
   `db_prod_stock` int(11) NOT NULL
@@ -99,43 +118,43 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`db_prod_id`, `db_prod_name`, `db_prod_color`, `db_prod_size`, `db_prod_price`, `db_prod_gender`, `db_prod_vendor_id`, `db_prod_stock`) VALUES
-(1, 'T-Shirt 1', 'red', 'Large', 400, 'male', 0, 0),
-(2, 'T-Shirt 1', 'red', 'Medium', 500, 'male', 0, 0),
-(3, 'T-Shirt 1', 'blue', 'Small', 300, 'male', 0, 0),
-(4, 'T-Shirt 2', 'red', 'Large', 500, 'male', 0, 0),
-(5, 'T-Shirt 2', 'green', 'Medium', 400, 'male', 0, 0),
-(6, 'T-shirt 2', 'blue', 'Small', 300, 'male', 0, 0),
-(7, 'T-shirt 3', 'yellow', 'Large', 700, 'male', 0, 0),
-(8, 'T-shirt 3', 'blue', 'Medium', 400, 'male', 0, 0),
-(9, 'T-shirt 3', 'blue', 'Small', 300, 'male', 0, 0),
-(10, 'Shirt 1', 'blue', 'Large', 600, 'male', 0, 0),
-(11, 'Shirt 1', 'red', 'Medium', 500, 'male', 0, 0),
-(12, 'Shirt 1', 'blue', 'Small', 300, 'male', 0, 0),
-(13, 'Shirt 2', 'red', 'Large', 500, 'male', 0, 0),
-(14, 'Shirt 2', 'green', 'Medium', 500, 'male', 0, 0),
-(15, 'Shirt 2', 'blue', 'Small', 300, 'male', 0, 0),
-(16, 'Shirt 3', 'blue', 'Large', 700, 'male', 0, 0),
-(17, 'Shirt 3', 'blue', 'Medium', 400, 'male', 0, 0),
-(18, 'Shirt 3', 'blue', 'Small', 300, 'male', 0, 0),
-(19, 'Kurti 1', 'red', 'Large', 800, 'female', 0, 0),
-(20, 'Kurti 1', 'red', 'Medium', 600, 'female', 0, 0),
-(21, 'Kurti 1', 'blue', 'Small', 500, 'female', 0, 0),
-(22, 'Kurti 2', 'red', 'Large', 900, 'female', 0, 0),
-(23, 'Kurti 2', 'green', 'Medium', 600, 'female', 0, 0),
-(24, 'Kurti 2', 'blue', 'Small', 400, 'female', 0, 0),
-(25, 'Kurti 3', 'yellow', 'Large', 700, 'female', 0, 0),
-(26, 'Kurti 3', 'blue', 'Medium', 500, 'female', 0, 0),
-(27, 'Kurti 3', 'blue', 'Small', 500, 'female', 0, 0),
-(28, 'Dress 1', 'blue', 'Large', 1000, 'female', 0, 0),
-(29, 'Dress 1', 'red', 'Medium', 800, 'female', 0, 0),
-(30, 'Dress 1', 'blue', 'Small', 600, 'female', 0, 0),
-(31, 'Dress 2', 'red', 'Large', 1200, 'female', 0, 0),
-(32, 'Dress 2', 'green', 'Medium', 700, 'female', 0, 0),
-(33, 'Dress 2', 'blue', 'Small', 600, 'female', 0, 0),
-(34, 'Dress 3', 'blue', 'Large', 1400, 'female', 0, 0),
-(35, 'Dress 3', 'blue', 'Medium', 700, 'female', 0, 0),
-(36, 'Dress 3', 'blue', 'Small', 600, 'female', 0, 0);
+INSERT INTO `product` (`db_prod_id`, `db_prod_section`, `db_prod_name`, `db_prod_color`, `db_prod_size`, `db_prod_price`, `db_prod_gender`, `db_prod_vendor_id`, `db_prod_stock`) VALUES
+(1, 't-shirt', 'T-Shirt 1', 'red', 'Large', 400, 'male', 0, 0),
+(2, 't-shirt', 'T-Shirt 1', 'red', 'Medium', 500, 'male', 0, 0),
+(3, 't-shirt', 'T-Shirt 1', 'blue', 'Small', 300, 'male', 0, 0),
+(4, 't-shirt', 'T-Shirt 2', 'red', 'Large', 500, 'male', 0, 0),
+(5, 't-shirt', 'T-Shirt 2', 'green', 'Medium', 400, 'male', 0, 0),
+(6, 't-shirt', 'T-shirt 2', 'blue', 'Small', 300, 'male', 0, 0),
+(7, 't-shirt', 'T-shirt 3', 'yellow', 'Large', 700, 'male', 0, 0),
+(8, 't-shirt', 'T-shirt 3', 'blue', 'Medium', 400, 'male', 0, 0),
+(9, 't-shirt', 'T-shirt 3', 'blue', 'Small', 300, 'male', 0, 0),
+(10, 'shirt', 'Shirt 1', 'blue', 'Large', 600, 'male', 0, 0),
+(11, 'shirt', 'Shirt 1', 'red', 'Medium', 500, 'male', 0, 0),
+(12, 'shirt', 'Shirt 1', 'blue', 'Small', 300, 'male', 0, 0),
+(13, 'shirt', 'Shirt 2', 'red', 'Large', 500, 'male', 0, 0),
+(14, 'shirt', 'Shirt 2', 'green', 'Medium', 500, 'male', 0, 0),
+(15, 'shirt', 'Shirt 2', 'blue', 'Small', 300, 'male', 0, 0),
+(16, 'shirt', 'Shirt 3', 'blue', 'Large', 700, 'male', 0, 0),
+(17, 'shirt', 'Shirt 3', 'blue', 'Medium', 400, 'male', 0, 0),
+(18, 'shirt', 'Shirt 3', 'blue', 'Small', 300, 'male', 0, 0),
+(19, 'kurti', 'Kurti 1', 'red', 'Large', 800, 'female', 0, 0),
+(20, 'kurti', 'Kurti 1', 'red', 'Medium', 600, 'female', 0, 0),
+(21, 'kurti', 'Kurti 1', 'blue', 'Small', 500, 'female', 0, 0),
+(22, 'kurti', 'Kurti 2', 'red', 'Large', 900, 'female', 0, 0),
+(23, 'kurti', 'Kurti 2', 'green', 'Medium', 600, 'female', 0, 0),
+(24, 'kurti', 'Kurti 2', 'blue', 'Small', 400, 'female', 0, 0),
+(25, 'kurti', 'Kurti 3', 'yellow', 'Large', 700, 'female', 0, 0),
+(26, 'kurti', 'Kurti 3', 'blue', 'Medium', 500, 'female', 0, 0),
+(27, 'kurti', 'Kurti 3', 'blue', 'Small', 500, 'female', 0, 0),
+(28, 'dress', 'Dress 1', 'blue', 'Large', 1000, 'female', 0, 0),
+(29, 'dress', 'Dress 1', 'red', 'Medium', 800, 'female', 0, 0),
+(30, 'dress', 'Dress 1', 'blue', 'Small', 600, 'female', 0, 0),
+(31, 'dress', 'Dress 2', 'red', 'Large', 1200, 'female', 0, 0),
+(32, 'dress', 'Dress 2', 'green', 'Medium', 700, 'female', 0, 0),
+(33, 'dress', 'Dress 2', 'blue', 'Small', 600, 'female', 0, 0),
+(34, 'dress', 'Dress 3', 'blue', 'Large', 1400, 'female', 0, 0),
+(35, 'dress', 'Dress 3', 'blue', 'Medium', 700, 'female', 0, 0),
+(36, 'dress', 'Dress 3', 'blue', 'Small', 600, 'female', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -161,6 +180,15 @@ CREATE TABLE `wishlist` (
   `db_wish_cust_id` int(11) NOT NULL,
   `db_wish_product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`db_wish_cust_id`, `db_wish_product_id`) VALUES
+(7, 1),
+(7, 2),
+(7, 3);
 
 --
 -- Indexes for dumped tables
@@ -214,7 +242,7 @@ ALTER TABLE `bills`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `db_cust_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `db_cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `orders`
