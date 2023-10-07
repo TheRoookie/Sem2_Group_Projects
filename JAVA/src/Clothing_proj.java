@@ -10,7 +10,7 @@ class other {
     int id, lid = 1;
 
     void entry() throws Exception {
-        String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+        String dburl = "jdbc:mysql://localhost:3306/part";
         String dbuser = "root";
         String dbpassword = "";
         String driver = "com.mysql.jdbc.Driver";
@@ -129,7 +129,7 @@ class Shop {
     Scanner sc = new Scanner(System.in);
 
     void bill(ArrayList<Integer> a) throws Exception {
-        String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+        String dburl = "jdbc:mysql://localhost:3306/parth";
         String dbuser = "root";
         String dbpassword = "";
         String driver = "com.mysql.jdbc.Driver";
@@ -422,7 +422,7 @@ class Shop {
     void bycolor(int i, String gen) throws Exception {
         ArrayList<Integer> idList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+        String dburl = "jdbc:mysql://localhost:3306/parth";
         String dbuser = "root";
         String dbpassword = "";
         String driver = "com.mysql.jdbc.Driver";
@@ -543,7 +543,7 @@ class Shop {
     void byprice(int i, String gen) throws Exception {
         ArrayList<Integer> idList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+        String dburl = "jdbc:mysql://localhost:3306/parth";
         String dbuser = "root";
         String dbpassword = "";
         String driver = "com.mysql.jdbc.Driver";
@@ -682,7 +682,7 @@ class Shop {
     void bysize(int i, String gen) throws Exception {
         ArrayList<Integer> idList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+        String dburl = "jdbc:mysql://localhost:3306/parth";
         String dbuser = "root";
         String dbpassword = "";
         String driver = "com.mysql.jdbc.Driver";
@@ -799,7 +799,7 @@ class Shop {
 
     // void bycolor1(int i) throws Exception {
     // Scanner sc = new Scanner(System.in);
-    // String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+    // String dburl = "jdbc:mysql://localhost:3306/parth";
     // String dbuser = "root";
     // String dbpassword = "";
     // String driver = "com.mysql.jdbc.Driver";
@@ -891,7 +891,7 @@ class Shop {
 
     void showall(int i, String gen) throws Exception {
         ArrayList<Integer> idList = new ArrayList<>();
-        String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+        String dburl = "jdbc:mysql://localhost:3306/parth";
         String dbuser = "root";
         String dbpassword = "";
         String driver = "com.mysql.jdbc.Driver";
@@ -945,7 +945,7 @@ class Shop {
 
     void show_whis_cart(String whis_cart) throws Exception {
 
-        String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+        String dburl = "jdbc:mysql://localhost:3306/parth";
         String dbuser = "root";
         String dbpassword = "";
         String driver = "com.mysql.jdbc.Driver";
@@ -1085,7 +1085,7 @@ class Shop {
     }
 
     // void show_cart() throws Exception {
-    // String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+    // String dburl = "jdbc:mysql://localhost:3306/parth";
     // String dbuser = "root";
     // String dbpassword = "";
     // String driver = "com.mysql.jdbc.Driver";
@@ -1169,7 +1169,7 @@ class Shop {
     // }
 
     // void showall1(int i) throws Exception {
-    // String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+    // String dburl = "jdbc:mysql://localhost:3306/parth";
     // String dbuser = "root";
     // String dbpassword = "";
     // String driver = "com.mysql.jdbc.Driver";
@@ -1202,7 +1202,7 @@ class Shop {
 
     void show_byfilter(int i, int save_price, String save_colour, String save_size, String gen) throws Exception {
         ArrayList<Integer> idList = new ArrayList<>();
-        String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+        String dburl = "jdbc:mysql://localhost:3306/parth";
         String dbuser = "root";
         String dbpassword = "";
         String driver = "com.mysql.jdbc.Driver";
@@ -1298,7 +1298,7 @@ class Shop {
 
     void Val(String gen) throws Exception {
         Scanner sc = new Scanner(System.in);
-        String dburl = "jdbc:mysql://localhost:3306/mydb";
+        String dburl = "jdbc:mysql://localhost:3306/parth";
         String dbuser = "root";
         String dbpassword = "";
         String driver = "com.mysql.jdbc.Driver";
@@ -1424,7 +1424,7 @@ class Shop {
 
     void Val1(String gen) throws Exception {
         Scanner sc = new Scanner(System.in);
-        String dburl = "jdbc:mysql://localhost:3306/mydb";
+        String dburl = "jdbc:mysql://localhost:3306/parth";
         String dbuser = "root";
         String dbpassword = "";
         String driver = "com.mysql.jdbc.Driver";
@@ -1617,7 +1617,7 @@ class Clothing_proj {
     public static void main(String[] args) throws Exception {
 
         Scanner sc = new Scanner(System.in);
-        String dburl = "jdbc:mysql://localhost:3306/e-clothing";
+        String dburl = "jdbc:mysql://localhost:3306/parth";
         String dbuser = "root";
         String dbpassword = "";
         String driver = "com.mysql.jdbc.Driver";
